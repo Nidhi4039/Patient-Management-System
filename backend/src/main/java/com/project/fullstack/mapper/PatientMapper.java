@@ -1,7 +1,10 @@
 package com.project.fullstack.mapper;
 
+import com.project.fullstack.dto.PatientRequestDTO;
 import com.project.fullstack.dto.PatientResponseDTO;
 import com.project.fullstack.model.Patient;
+
+import java.time.LocalDate;
 
 public class PatientMapper {
     public static PatientResponseDTO toDTO(Patient patient)
@@ -13,6 +16,17 @@ public class PatientMapper {
         patientResponseDTO.setAddress(patient.getAddress());
         patientResponseDTO.setDateOfBirth(patient.getDateOfBirth().toString());
         return patientResponseDTO;
+    }
+
+    public static Patient toPatient(PatientRequestDTO patientRequestDTO)
+    {
+        Patient patient = new Patient();
+        patient.setName(patientRequestDTO.getName());
+        patient.setEmail(patientRequestDTO.getEmail());
+        patient.setAddress(patientRequestDTO.getAddress());
+        patient.setDateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()));
+        patient.setRegisteredDate(LocalDate.parse(patientRequestDTO.getRegisteredDate()));
+        return patient;
     }
 
 }
