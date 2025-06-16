@@ -1,6 +1,7 @@
 package com.project.fullstack.controller;
 
 
+import com.project.fullstack.dto.PatientRequestDTO;
 import com.project.fullstack.dto.PatientResponseDTO;
 import com.project.fullstack.service.PatientService;
 import jakarta.validation.Valid;
