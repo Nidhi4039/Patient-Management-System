@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: Patient-Management-System
+  datasource:
+    url: jdbc:postgresql://dpg-d16rtovdiees73dhiro0-a.singapore-postgres.render.com/patient_management_system_db
+    username: patient_management_system_db_user
+    password: HZ4QnSd8BaggkcMIPKl4AlVa2oqM5umZ
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
