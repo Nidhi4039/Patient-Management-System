@@ -1,15 +1,12 @@
 spring:
   application:
     name: Patient-Management-System
-  h2:
-    console:
-      path: /h2-console
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class.name: org.h2.Driver
-    username: admin_user
-    password: admin_pwd
+    url: jdbc:postgresql://dpg-d16rtovdiees73dhiro0-a.singapore-postgres.render.com/patient_management_system_db
+    username: patient_management_system_db_user
+    password: HZ4QnSd8BaggkcMIPKl4AlVa2oqM5umZ
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+
