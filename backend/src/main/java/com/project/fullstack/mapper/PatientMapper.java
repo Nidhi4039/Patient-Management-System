@@ -5,6 +5,8 @@ import com.project.fullstack.dto.PatientResponseDTO;
 import com.project.fullstack.model.Patient;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class PatientMapper {
     public static PatientResponseDTO toDTO(Patient patient)
@@ -20,12 +22,13 @@ public class PatientMapper {
 
     public static Patient toPatient(PatientRequestDTO patientRequestDTO)
     {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         Patient patient = new Patient();
         patient.setName(patientRequestDTO.getName());
         patient.setEmail(patientRequestDTO.getEmail());
         patient.setAddress(patientRequestDTO.getAddress());
-        patient.setDateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()));
-        patient.setRegisteredDate(LocalDate.parse(patientRequestDTO.getRegisteredDate()));
+        patient.setDateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth(),df));
+        patient.setRegisteredDate(LocalDate.parse(patientRequestDTO.getRegisteredDate(),df));
         return patient;
     }
 
