@@ -2,6 +2,7 @@ package com.project.fullstack.service;
 
 import com.project.fullstack.dto.PatientRequestDTO;
 import com.project.fullstack.dto.PatientResponseDTO;
+import com.project.fullstack.exception.EmailAlreadyExistsException;
 import com.project.fullstack.mapper.PatientMapper;
 import com.project.fullstack.model.Patient;
 import com.project.fullstack.repository.PatientRepository;
@@ -25,7 +26,10 @@ public class PatientService {
     }
 
     public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) {
-
+        if(patientRepository.existsByEmail((patientRequestDTO.getEmail())))
+        {
+            throw new EmailAlreadyExistsException("Email already exists: " + patientRequestDTO.getEmail());
+        }
      Patient newPatient=patientRepository.save(PatientMapper.toPatient(patientRequestDTO));
      return PatientMapper.toDTO(newPatient);
 
