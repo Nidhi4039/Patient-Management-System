@@ -32,4 +32,14 @@ public class PatientMapper {
         return patient;
     }
 
+    public static Patient toUpdatePatient(Patient patient, PatientRequestDTO patientRequestDTO)
+    {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        patient.setName(patientRequestDTO.getName());
+        patient.setEmail(patientRequestDTO.getEmail());
+        patient.setAddress(patientRequestDTO.getAddress());
+        patient.setDateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth(),df));
+        return patient;
+    }
+
 }
