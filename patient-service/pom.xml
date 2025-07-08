@@ -11,7 +11,7 @@
 	<groupId>com.project</groupId>
 	<artifactId>patient-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Patient-Management-System</name>
+	<name>patient-service</name>
 	<description>Full Stack Project for Spring Boot</description>
 	<url/>
 	<licenses>
