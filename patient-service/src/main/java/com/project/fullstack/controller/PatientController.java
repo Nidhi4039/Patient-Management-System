@@ -3,11 +3,14 @@ package com.project.fullstack.controller;
 
 import com.project.fullstack.dto.PatientRequestDTO;
 import com.project.fullstack.dto.PatientResponseDTO;
+import com.project.fullstack.dto.validators.CreatePatientValidationGroup;
 import com.project.fullstack.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
+import jakarta.validation.groups.Default;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,14 +35,14 @@ public class PatientController {
 
     @PostMapping("/new")
     @Operation(summary = "Create a new patient")
-    public ResponseEntity<PatientResponseDTO> createPatient(@Valid @RequestBody PatientRequestDTO patientRequestDTO){
+    public ResponseEntity<PatientResponseDTO> createPatient(@Validated({Default.class, CreatePatientValidationGroup.class}) @RequestBody PatientRequestDTO patientRequestDTO){
         PatientResponseDTO patientResponseDTO = patientService.createPatient(patientRequestDTO);
         return ResponseEntity.ok(patientResponseDTO);
     }
 
     @PutMapping("/update/{id}")
     @Operation(summary = "Update an existing patient")
-    public ResponseEntity<PatientResponseDTO> updatePatient(@PathVariable UUID id, @RequestBody PatientRequestDTO patientRequestDTO){
+    public ResponseEntity<PatientResponseDTO> updatePatient(@PathVariable UUID id,@Validated({Default.class}) @RequestBody PatientRequestDTO patientRequestDTO){
         PatientResponseDTO patientResponseDTO = patientService.updatePatient(id, patientRequestDTO);
         return ResponseEntity.ok(patientResponseDTO);
     }
