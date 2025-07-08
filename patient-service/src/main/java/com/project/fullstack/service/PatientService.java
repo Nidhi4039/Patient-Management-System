@@ -1,9 +1,11 @@
 package com.project.fullstack.service;
 
+import billing.BillingRequest;
 import com.project.fullstack.dto.PatientRequestDTO;
 import com.project.fullstack.dto.PatientResponseDTO;
 import com.project.fullstack.exception.EmailAlreadyExistsException;
 import com.project.fullstack.exception.PatientNotFoundException;
+import com.project.fullstack.grpc.BillingServiceGrpcClient;
 import com.project.fullstack.mapper.PatientMapper;
 import com.project.fullstack.model.Patient;
 import com.project.fullstack.repository.PatientRepository;
@@ -17,9 +19,10 @@ import java.util.UUID;
 public class PatientService {
 
     private final PatientRepository patientRepository;
-
-    public PatientService(PatientRepository patientRepository) {
+    private  final BillingServiceGrpcClient billingServiceGrpcClient;
+    public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
         this.patientRepository = patientRepository;
+        this.billingServiceGrpcClient= billingServiceGrpcClient;
     }
 
     public List<PatientResponseDTO> getAllPatients() {
@@ -33,6 +36,7 @@ public class PatientService {
         throw new EmailAlreadyExistsException("Email already exists: " + patientRequestDTO.getEmail());
     }
      Patient newPatient=patientRepository.save(PatientMapper.toPatient(patientRequestDTO));
+    billingServiceGrpcClient.createBillingAccount(newPatient.getId(),newPatient.getName(),newPatient.getEmail());
      return PatientMapper.toDTO(newPatient);
     }
 
