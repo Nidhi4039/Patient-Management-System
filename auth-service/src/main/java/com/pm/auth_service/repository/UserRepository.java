@@ -1,4 +1,4 @@
-package com.pm.auth_service.Repository;
+package com.pm.auth_service.repository;
 
 import com.pm.auth_service.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
